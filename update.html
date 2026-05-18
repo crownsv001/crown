@@ -1,0 +1,551 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Crown Server - 업데이트</title>
+
+<style>
+/* ------------------------------
+   좌측 사이드바 메뉴 스타일
+------------------------------ */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    background: linear-gradient(180deg, rgba(10,16,26,0.95) 0%, rgba(7,12,20,0.95) 100%);
+    border-right: 1px solid rgba(0,150,255,0.25);
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 5px 0 25px rgba(0,0,0,0.6);
+    backdrop-filter: blur(10px);
+}
+.sidebar-logo {
+    padding: 35px 20px 25px 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(0,150,255,0.15);
+}
+.sidebar-logo h2 {
+    margin: 0;
+    color: #fff;
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-shadow: 0 0 15px #0066ff, 0 0 25px #0033aa;
+}
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    padding: 25px 0;
+    flex: 1;
+    overflow-y: auto;
+}
+.sidebar-menu a {
+    color: #ccc;
+    padding: 16px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-left: 4px solid transparent;
+    transition: 0.25s;
+}
+.sidebar-menu a:hover {
+    color: #33ccff;
+    background: rgba(0, 150, 255, 0.08);
+    border-left: 4px solid #33ccff;
+    text-shadow: 0 0 10px #0088ff;
+}
+.sidebar-footer {
+    padding: 20px;
+    text-align: center;
+    font-size: 13px;
+    color: #666;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+/* 메인 컨텐츠 영역 (사이드바 우측) */
+.main-content {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+/* ------------------------------
+   상단 배너
+------------------------------ */
+.header {
+    background-image: url('images/megamain.png');
+    background-size: cover;
+    background-position: center;
+    height: 520px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 5;
+}
+.header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.25);
+}
+.header::after {
+    content:"";
+    position:absolute;
+    bottom:-1px;
+    width:100%;
+    height:350px;
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0) 0%,
+        rgba(0,0,0,0.25) 30%,
+        rgba(10,16,26,0.65) 65%,
+        rgba(0,0,0,0.9) 100%
+    );
+}
+
+.header h1 {
+    position: relative;
+    font-size: 43px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    color: #fff;
+    text-shadow: 0 0 15px #000, 0 0 25px #0066ff, 0 0 35px #0033aa;
+    top: 60px;
+    z-index: 10;
+}
+
+/* ------------------------------
+   본문 컨테이너
+------------------------------ */
+.container {
+    width: 1000px;
+    margin: 120px auto 70px auto;
+    padding-bottom: 80px;
+    position: relative;
+    z-index: 10;
+}
+
+h2 {
+    font-size: 32px;
+    color: #33ccff;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #0055ff;
+}
+
+/* ------------------------------
+    검색 영역
+------------------------------ */
+.search-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    gap: 10px;
+}
+.search-box-left {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+.search-input {
+    padding: 8px 10px;
+    width: 260px;
+    background: #111;
+    border: 1px solid #555;
+    color: #ddd;
+    border-radius: 5px;
+    font-size: 15px;
+}
+.btn {
+    padding: 8px 14px;
+    background: #0033aa;
+    color: #fff;
+    border: 1px solid #33ccff;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.2s;
+    white-space: nowrap;
+}
+.btn:hover {
+    background: #0055ff;
+    box-shadow: 0 0 10px #33ccff;
+}
+
+/* ------------------------------
+    게시판 테이블
+------------------------------ */
+table.board {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(0,0,0,0.65);
+    border: 1px solid rgba(0,150,255,0.4);
+    border-radius: 8px;
+    overflow: hidden;
+}
+table.board thead {
+    background: rgba(0,30,60,0.8);
+}
+table.board th, table.board td {
+    padding: 10px 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    font-size: 15px;
+    text-align: center;
+}
+table.board th:nth-child(2),
+table.board td:nth-child(2) {
+    text-align: left;
+}
+table.board tr:hover td {
+    background: rgba(0, 150, 255, 0.08);
+}
+.title-link {
+    color: #ddd;
+    text-decoration: none;
+}
+.title-link:hover {
+    color: #ffcc00;
+    text-shadow: 0 0 6px #ffcc00;
+}
+
+/* ------------------------------
+   페이징
+------------------------------ */
+.pagination {
+    margin-top: 15px;
+    text-align: center;
+}
+.pagination button {
+    background: #222;
+    border: 1px solid #555;
+    color: #ddd;
+    padding: 5px 10px;
+    margin: 0 2px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.pagination button.active {
+    background: #004488;
+    border-color: #33ccff;
+    font-weight: bold;
+}
+.pagination button:hover {
+    background: #444;
+}
+
+/* ------------------------------
+   상세 모달
+------------------------------ */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+.modal {
+    width: 650px;
+    max-height: 80vh;
+    overflow-y: auto;
+    background: #111;
+    border-radius: 10px;
+    padding: 20px 24px;
+    border: 1px solid #33ccff;
+    box-shadow: 0 0 20px rgba(0,150,255,0.6);
+}
+.modal-title {
+    font-size: 22px;
+    color: #ffcc00;
+    margin-bottom: 5px;
+}
+.modal-date {
+    font-size: 13px;
+    color: #aaa;
+    margin-bottom: 15px;
+}
+.modal-content {
+    font-size: 16px;
+    line-height: 1.6;
+    white-space: pre-line;
+    color: #ddd;
+}
+.modal-close {
+    margin-top: 18px;
+    text-align: right;
+}
+.modal-close button {
+    padding: 7px 14px;
+    background: #0033aa;
+    border-radius: 6px;
+    border: 1px solid #33ccff;
+    cursor: pointer;
+    color: #fff;
+}
+</style>
+
+<script>
+const PAGE_SIZE = 10;
+let updates = [];
+let filtered = [];
+let currentPage = 1;
+
+window.addEventListener("load", () => {
+    loadUpdates();
+});
+
+// ----------------------------------------
+// updates/data.txt 에서 데이터 불러오기
+// ----------------------------------------
+// 📌 data.txt 작성법:
+//   1번째 줄: 제목
+//   2번째 줄: 날짜 (예: 2026-05-18)
+//   3번째 줄~: 내용
+//   --- 로 구분하여 여러 업데이트 작성
+// ----------------------------------------
+function loadUpdates() {
+    fetch("updates/data.txt?t=" + Date.now())
+        .then(res => {
+            if (!res.ok) throw new Error("파일 로드 실패");
+            return res.text();
+        })
+        .then(text => {
+            const blocks = text.split("---").map(b => b.trim()).filter(b => b.length > 0);
+            const list = [];
+
+            blocks.forEach((block, idx) => {
+                const lines = block.split("\n");
+                if (lines.length < 2) return;
+
+                const title = lines[0].trim();
+                const date = lines[1].trim();
+                const content = lines.slice(2).join("\n").trim();
+
+                list.push({ id: idx + 1, title, date, content });
+            });
+
+            list.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            updates = list;
+            filtered = [...updates];
+            renderBoard();
+        })
+        .catch(err => {
+            console.error("업데이트 데이터 로드 실패:", err);
+            updates = [];
+            filtered = [];
+            renderBoard();
+        });
+}
+
+// ----------------------------------------
+// 게시판 렌더링
+// ----------------------------------------
+function renderBoard() {
+    const tbody = document.getElementById("boardBody");
+    const pagination = document.getElementById("pagination");
+
+    tbody.innerHTML = "";
+    pagination.innerHTML = "";
+
+    if (filtered.length === 0) {
+        const tr = document.createElement("tr");
+        const td = document.createElement("td");
+        td.colSpan = 3;
+        td.textContent = "등록된 업데이트가 없습니다.";
+        tr.appendChild(td);
+        tbody.appendChild(tr);
+        return;
+    }
+
+    const total = filtered.length;
+    const totalPages = Math.ceil(total / PAGE_SIZE);
+    if (currentPage > totalPages) currentPage = totalPages;
+
+    const start = (currentPage - 1) * PAGE_SIZE;
+    const end = start + PAGE_SIZE;
+    const pageItems = filtered.slice(start, end);
+
+    pageItems.forEach((u, idx) => {
+        const tr = document.createElement("tr");
+
+        // 번호
+        const noTd = document.createElement("td");
+        noTd.textContent = total - (start + idx);
+        tr.appendChild(noTd);
+
+        // 제목
+        const titleTd = document.createElement("td");
+        const a = document.createElement("a");
+        a.className = "title-link";
+        a.textContent = u.title;
+        a.href = "javascript:void(0)";
+        a.onclick = () => openDetail(u.id);
+        titleTd.appendChild(a);
+        tr.appendChild(titleTd);
+
+        // 날짜
+        const dateTd = document.createElement("td");
+        dateTd.textContent = u.date;
+        tr.appendChild(dateTd);
+
+        tbody.appendChild(tr);
+    });
+
+    // 페이징
+    const totalPages2 = Math.ceil(filtered.length / PAGE_SIZE);
+
+    if (totalPages2 > 1) {
+        const prevBtn = document.createElement("button");
+        prevBtn.textContent = "이전";
+        prevBtn.disabled = currentPage === 1;
+        prevBtn.onclick = () => { currentPage--; renderBoard(); };
+        pagination.appendChild(prevBtn);
+
+        for (let p = 1; p <= totalPages2; p++) {
+            const btn = document.createElement("button");
+            btn.textContent = p;
+            if (p === currentPage) btn.classList.add("active");
+            btn.onclick = () => { currentPage = p; renderBoard(); };
+            pagination.appendChild(btn);
+        }
+
+        const nextBtn = document.createElement("button");
+        nextBtn.textContent = "다음";
+        nextBtn.disabled = currentPage === totalPages2;
+        nextBtn.onclick = () => { currentPage++; renderBoard(); };
+        pagination.appendChild(nextBtn);
+    }
+}
+
+// ----------------------------------------
+// 검색 기능
+// ----------------------------------------
+function searchUpdates() {
+    const keyword = document.getElementById("searchInput").value.trim().toLowerCase();
+
+    if (!keyword) {
+        filtered = [...updates];
+    } else {
+        filtered = updates.filter(u =>
+            (u.title && u.title.toLowerCase().includes(keyword)) ||
+            (u.content && u.content.toLowerCase().includes(keyword))
+        );
+    }
+
+    currentPage = 1;
+    renderBoard();
+}
+
+// ----------------------------------------
+// 상세보기 모달
+// ----------------------------------------
+function openDetail(id) {
+    const u = updates.find(x => x.id === id);
+    if (!u) return;
+
+    document.getElementById("modalTitle").textContent = u.title;
+    document.getElementById("modalDate").textContent = u.date;
+    document.getElementById("modalContent").textContent = u.content || "";
+
+    document.getElementById("modalOverlay").style.display = "flex";
+}
+
+function closeModal() {
+    document.getElementById("modalOverlay").style.display = "none";
+}
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="mobile.css">
+</head>
+
+<body>
+
+<!-- 상단 메뉴 -->
+<div class="sidebar">
+    <div class="sidebar-logo">
+        <h2>CROWN</h2>
+    </div>
+    <div class="sidebar-menu">
+        <a href="index.html">🏠 홈</a>
+        <a href="notice.html">📢 공지사항</a>
+        <a href="info.html">📜 서버정보</a>
+        <a href="update.html">⚡ 업데이트</a>
+        <a href="boss.html">💀 보스정보</a>
+        <a href="doll.html">🧸 마법인형</a>
+        <a href="feature.html">🎛 간편기능</a>
+        <a href="hunting.html">🗺 레벨별 사냥터</a>
+        <a href="promo.html">📣 홍보안내</a>
+        <a href="service.html">💬 고객센터</a>
+        <a href="download.html">⬇ 다운로드</a>
+    </div>
+    <div class="sidebar-footer">
+        <span>© 2026 Crown Server</span>
+    </div>
+</div>
+<div class="main-content">
+
+<!-- 배너 -->
+<div class="header">
+    <h1>UPDATE</h1>
+</div>
+
+<!-- 본문 -->
+<div class="container">
+    <h2>📢 최신 업데이트</h2>
+
+    <div class="search-box">
+        <div class="search-box-left">
+            <input id="searchInput" class="search-input" type="text" placeholder="제목 또는 내용 검색">
+            <button class="btn" onclick="searchUpdates()">검색</button>
+            <button class="btn" onclick="document.getElementById('searchInput').value=''; searchUpdates();">전체보기</button>
+        </div>
+    </div>
+
+    <table class="board">
+        <thead>
+            <tr>
+                <th style="width:60px;">번호</th>
+                <th>제목</th>
+                <th style="width:120px;">작성일</th>
+            </tr>
+        </thead>
+        <tbody id="boardBody"></tbody>
+    </table>
+
+    <div id="pagination" class="pagination"></div>
+</div>
+
+<!-- 상세 모달 -->
+<div id="modalOverlay" class="modal-overlay">
+    <div class="modal">
+        <div class="modal-title" id="modalTitle"></div>
+        <div class="modal-date" id="modalDate"></div>
+        <div class="modal-content" id="modalContent"></div>
+        <div class="modal-close">
+            <button onclick="closeModal()">닫기</button>
+        </div>
+    </div>
+</div>
+
+<!-- 하단 -->
+<div class="footer">
+    서버의 모든 저작권은 NC소프트에 있으며, 리니지 개발과 발전, 커뮤니티를 위한 서버입니다.<br>
+    게임사의 요청 시 서버는 언제든지 중단될 수 있음을 알려드립니다.
+</div>
+</div><!-- //main-content -->
+
+</body>
+</html>

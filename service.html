@@ -1,0 +1,287 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>고객센터</title>
+
+    <style>
+        /* ------------------------------
+   좌측 사이드바 메뉴 스타일
+------------------------------ */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100vh;
+            background: linear-gradient(180deg, rgba(10, 16, 26, 0.95) 0%, rgba(7, 12, 20, 0.95) 100%);
+            border-right: 1px solid rgba(0, 150, 255, 0.25);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 5px 0 25px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+        }
+
+        .sidebar-logo {
+            padding: 35px 20px 25px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 150, 255, 0.15);
+        }
+
+        .sidebar-logo h2 {
+            margin: 0;
+            color: #fff;
+            font-size: 26px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-shadow: 0 0 15px #0066ff, 0 0 25px #0033aa;
+        }
+
+        .sidebar-menu {
+            display: flex;
+            flex-direction: column;
+            padding: 25px 0;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .sidebar-menu a {
+            color: #ccc;
+            padding: 16px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-left: 4px solid transparent;
+            transition: 0.25s;
+        }
+
+        .sidebar-menu a:hover {
+            color: #33ccff;
+            background: rgba(0, 150, 255, 0.08);
+            border-left: 4px solid #33ccff;
+            text-shadow: 0 0 10px #0088ff;
+        }
+
+        .sidebar-footer {
+            padding: 20px;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* 메인 컨텐츠 영역 (사이드바 우측) */
+        .main-content {
+            margin-left: 250px;
+            width: calc(100% - 250px);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+
+        /* 배너 (파란 드래곤 이미지 적용) */
+        .header {
+            background-image: url('images/megamain.png');
+            background-size: cover;
+            background-position: center;
+            height: 520px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .header::after {
+            content: "";
+            position: absolute;
+            bottom: -1px;
+            width: 100%;
+            height: 350px;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(11, 15, 21, 0.95) 100%);
+        }
+
+        .header h1 {
+            position: relative;
+            font-size: 43px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            color: #fff;
+            top: 60px;
+            text-shadow: 0 0 15px #000, 0 0 25px #0066ff, 0 0 35px #0033aa;
+            z-index: 10;
+        }
+
+        /* 컨테이너 (블루 테마 외곽선 및 네온 효과) */
+        .container {
+            width: 860px;
+            margin: 120px auto 70px auto;
+            background: rgba(10, 18, 30, 0.82);
+            padding: 45px 50px;
+            border: 1px solid rgba(0, 150, 255, 0.35);
+            border-radius: 12px;
+            box-shadow: 0 0 25px rgba(0, 100, 255, 0.25);
+            line-height: 1.65;
+            font-size: 18px;
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(5px);
+        }
+
+        .service-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 35px 0;
+        }
+
+        .service-icon {
+            width: 100px;
+            flex-shrink: 0;
+            filter: drop-shadow(0 0 8px rgba(0, 150, 255, 0.4));
+            /* 텔레그램 아이콘에 은은한 푸른 광원 추가 */
+        }
+
+        .service-text {
+            flex: 1;
+            margin-left: 25px;
+        }
+
+        .service-text-title {
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #fff;
+            text-shadow: 0 0 8px rgba(51, 204, 255, 0.3);
+        }
+
+        .service-text-desc {
+            font-size: 16px;
+            color: #b0c4de;
+        }
+
+        /* 버튼 (네온 블루 스타일로 변경) */
+        .service-btn {
+            background: #0044aa;
+            padding: 15px 30px;
+            color: #fff;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.2s;
+            border: 1px solid #0088ff;
+            box-shadow: 0 0 8px rgba(0, 100, 255, 0.3);
+        }
+
+        .service-btn:hover {
+            background: #0066ff;
+            border-color: #33ccff;
+            box-shadow: 0 0 15px #0088ff, 0 0 25px #0044aa;
+        }
+
+        .service-line {
+            width: 100%;
+            height: 1px;
+            background: rgba(0, 150, 255, 0.15);
+            margin: 10px 0;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mobile.css">
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <div class="sidebar-logo">
+            <h2>CROWN</h2>
+        </div>
+        <div class="sidebar-menu">
+            <a href="index.html">🏠 홈</a>
+            <a href="notice.html">📢 공지사항</a>
+            <a href="info.html">📜 서버정보</a>
+            <a href="update.html">⚡ 업데이트</a>
+            <a href="boss.html">💀 보스정보</a>
+            <a href="doll.html">🧸 마법인형</a>
+            <a href="feature.html">🎛 간편기능</a>
+            <a href="hunting.html">🗺 레벨별 사냥터</a>
+            <a href="promo.html">📣 홍보안내</a>
+            <a href="service.html" class="active">💬 고객센터</a>
+            <a href="download.html">⬇ 다운로드</a>
+        </div>
+        <div class="sidebar-footer">
+            <span>© 2026 Crown Server</span>
+        </div>
+    </div>
+    <div class="main-content">
+
+        <div class="header">
+            <h1>고객센터</h1>
+        </div>
+
+        <div class="container">
+            <div class="service-row">
+                <img src="images/discord.png" class="service-icon" alt="디스코드">
+                <div class="service-text">
+                    <div class="service-text-title">크라운 서버 디스코드채널</div>
+                    <div class="service-text-desc">
+                        다양한 소식을 공지방에서 확인하세요.<br>
+                        * 해당 링크 클릭 시 디스코드 채널로 이동합니다.
+                    </div>
+                </div>
+                <a href="https://discord.com/invite/4sTYKXXmQS" class="service-btn" target="_blank">디스코드 공지방</a>
+            </div>
+
+            <div class="service-line"></div>
+
+            <div class="service-row">
+                <img src="images/telegram.png" class="service-icon" alt="Contact">
+                <div class="service-text">
+                    <div class="service-text-title">1:1 고객지원</div>
+                    <div class="service-text-desc">
+                        문의 사항이 있을 경우 텔레그램으로 연락해주세요.<br>
+                        * 상담 가능 시간: 24시간 상시 문의 가능
+                    </div>
+                </div>
+                <a href="https://t.me/thecrowngm" class="service-btn" target="_blank">고객센터 문의하기</a>
+            </div>
+        </div>
+        <div class="service-text-desc">
+            다양한 소식을 단톡방에서 확인하세요.<br>
+            * 해당 링크 클릭 시 카카오톡으로 이동합니다.
+        </div>
+    </div>
+    <a href="https://open.kakao.com/o/gTItXrvi" class="service-btn" target="_blank">카카오톡 단톡방</a>
+    </div>
+
+    <div class="service-line"></div>
+
+    <div class="service-row">
+        <img src="images/kakao.png" class="service-icon" alt="KakaoTalk">
+        <div class="service-text">
+            <div class="service-text-title">1:1 고객지원</div>
+            <div class="service-text-desc">
+                문의 사항이 있을 경우 카카오톡으로 연락해주세요.<br>
+                * 상담 가능 시간: 24시간 상시 문의 가능
+            </div>
+        </div>
+        <a href="https://open.kakao.com/o/sMO2Hsvi" class="service-btn" target="_blank">카카오톡 문의하기</a>
+    </div>
+
+    </div>
+
+    <div class="footer">
+        서버의 모든 저작권은 NC소프트에 있으며, 리니지 개발과 발전, 커뮤니티를 위한 서버입니다.<br>
+        게임사의 요청 시 서버는 언제든지 중단될 수 있음을 알려드립니다.
+    </div>
+    </div><!-- //main-content -->
+
+</body>
+
+</html>
