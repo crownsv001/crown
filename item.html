@@ -1,12 +1,21 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 
 <head>
+<script>
+    if (window !== window.top) {
+        document.documentElement.classList.add('iframe-mode');
+        const style = document.createElement('style');
+        style.innerHTML = '.sidebar { display: none !important; } .main-content { margin-left: 0 !important; width: 100% !important; }';
+        document.head.appendChild(style);
+    }
+</script>
     <meta charset="UTF-8">
     <title>Crown Server - 아이템 정보</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="mobile.css">
     <style>
+html { overflow-y: scroll; }
         /* ------------------------------
            전체 레이아웃 및 바디 배경 지정
         ------------------------------ */
@@ -21,7 +30,9 @@
            좌측 사이드바 메뉴 스타일
         ------------------------------ */
         .sidebar {
-            position: fixed;
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+    box-sizing: border-box;
+    position: fixed;
             top: 0;
             left: 0;
             width: 250px;
@@ -33,13 +44,11 @@
             flex-direction: column;
             box-shadow: 5px 0 25px rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(10px);
-        }
+}
 
-        .sidebar-logo {
-            padding: 35px 20px 25px 20px;
+        .sidebar-logo { box-sizing: border-box; padding: 18px 20px 12px 20px;
             text-align: center;
-            border-bottom: 1px solid rgba(0, 150, 255, 0.15);
-        }
+            border-bottom: 1px solid rgba(0, 150, 255, 0.15); }
 
         .sidebar-logo h2 {
             margin: 0;
@@ -50,17 +59,14 @@
             text-shadow: 0 0 15px #0066ff, 0 0 25px #0033aa;
         }
 
-        .sidebar-menu {
-            display: flex;
+        .sidebar-menu { box-sizing: border-box; display: flex;
             flex-direction: column;
-            padding: 25px 0;
+            padding: 5px 0;
             flex: 1;
-            overflow-y: auto;
-        }
+            overflow-y: auto; }
 
-        .sidebar-menu a {
-            color: #ccc;
-            padding: 16px 30px;
+        .sidebar-menu a { box-sizing: border-box; color: #ccc;
+            padding: 10px 30px;
             font-size: 18px;
             font-weight: bold;
             text-decoration: none;
@@ -68,15 +74,14 @@
             align-items: center;
             gap: 15px;
             border-left: 4px solid transparent;
-            transition: 0.25s;
-        }
+            transition: 0.25s; }
 
         .sidebar-menu a:hover, .sidebar-menu a.active {
-            color: #33ccff;
-            background: rgba(0, 150, 255, 0.08);
-            border-left: 4px solid #33ccff;
-            text-shadow: 0 0 10px #0088ff;
-        }
+    color: #33ccff;
+    background: rgba(0, 150, 255, 0.08);
+    border-left: 4px solid #33ccff;
+    text-shadow: 0 0 10px #0088ff;
+}
 
         .sidebar-footer {
             padding: 20px;
@@ -348,7 +353,16 @@
             text-align: center;
             line-height: 1.5;
         }
-    </style>
+    
+.sidebar-menu::-webkit-scrollbar { display: none !important; }
+.sidebar-menu { -ms-overflow-style: none !important; scrollbar-width: none !important; }
+
+
+@media screen and (min-width: 769px) {
+    html.iframe-mode .sidebar { display: none !important; }
+    html.iframe-mode .main-content { margin-left: 0 !important; width: 100% !important; }
+}
+</style>
 </head>
 
 <body>
@@ -359,25 +373,27 @@
         });
     </script>
 
-    <!-- 좌측 메뉴 (보스 -> 인형 -> 아이템 순서로 변경) -->
+    <!-- 좌측 메뉴 -->
     <div class="sidebar">
         <div class="sidebar-logo">
             <h2>CROWN</h2>
         </div>
-            <div class="sidebar-menu">
-        <a href="index.html">🏠 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;홈&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-        <a href="notice.html">📢 공&nbsp;&nbsp;지&nbsp;&nbsp;사&nbsp;&nbsp;항</a>
-        <a href="info.html">📜 서&nbsp;&nbsp;버&nbsp;&nbsp;정&nbsp;&nbsp;보</a>
-        <a href="update.html">⚡ 업&nbsp;&nbsp;데&nbsp;&nbsp;이&nbsp;&nbsp;트</a>
-        <a href="boss.html">💀 보&nbsp;&nbsp;스&nbsp;&nbsp;정&nbsp;&nbsp;보</a>
-        <a href="doll.html">🧸 마&nbsp;&nbsp;법&nbsp;&nbsp;인&nbsp;&nbsp;형</a>
-        <a href="item.html" class="active">💎 아&nbsp;이&nbsp;템&nbsp;정&nbsp;보</a>
-        <a href="feature.html">⚙️ 간&nbsp;&nbsp;편&nbsp;&nbsp;기&nbsp;&nbsp;능</a>
-        <a href="hunting.html">🚩 레벨별 사냥터</a>
-        <a href="promo.html">📣 홍&nbsp;&nbsp;보&nbsp;&nbsp;안&nbsp;&nbsp;내</a>
-        <a href="service.html">💬 고&nbsp;&nbsp;객&nbsp;&nbsp;센&nbsp;&nbsp;터</a>
+        <div class="sidebar-menu">
+            <a href="index.html">🏠 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;홈&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <a href="notice.html">📢 공&nbsp;&nbsp;지&nbsp;&nbsp;사&nbsp;&nbsp;항</a>
+            <a href="info.html">📜 서&nbsp;&nbsp;버&nbsp;&nbsp;정&nbsp;&nbsp;보</a>
+            <a href="update.html">⚡ 업&nbsp;&nbsp;데&nbsp;&nbsp;이&nbsp;&nbsp;트</a>
+            <a href="boss.html">💀 보&nbsp;&nbsp;스&nbsp;&nbsp;정&nbsp;&nbsp;보</a>
+            <a href="doll.html">🧸 마&nbsp;&nbsp;법&nbsp;&nbsp;인&nbsp;&nbsp;형</a>
+        <a href="maan.html">👁️ 마&nbsp;&nbsp;안&nbsp;&nbsp;정&nbsp;&nbsp;보</a>
+            <a href="item.html" class="active">💎 아&nbsp;이&nbsp;템&nbsp;정&nbsp;보</a>
+            <a href="feature.html">⚙️ 간&nbsp;&nbsp;편&nbsp;&nbsp;기&nbsp;&nbsp;능</a>
+            <a href="hunting.html">🚩 레벨별 사냥터</a>
+            <a href="promo.html">📣 홍&nbsp;&nbsp;보&nbsp;&nbsp;안&nbsp;&nbsp;내</a>
+            <a href="service.html">💬 고&nbsp;&nbsp;객&nbsp;&nbsp;센&nbsp;&nbsp;터</a>
+            <a href="security.html">🛡️ 보안 설정(필수)</a>
         <a href="download.html">⬇ 다&nbsp;&nbsp;운&nbsp;&nbsp;로&nbsp;&nbsp;드</a>
-    </div>
+        </div>
         <div class="sidebar-footer">
             <span>© 2026 Crown Server</span>
         </div>
@@ -393,7 +409,7 @@
         <!-- 본문 -->
         <div class="container">
 
-            <!-- [신규 최상단] 1. 인챈트 +7 이상 무기 추가 대미지 -->
+            <!-- 1. 인챈트 +7 이상 무기 추가 대미지 -->
             <h2>🌟 인챈트 +7 이상 무기 추가 대미지 <span style="font-size:18px; color:#aaa; font-weight:normal;">(인챈당 추타)</span></h2>
             <p>기본 추가 타격, HP 흡수, MP 흡수 보너스 외에, 고인챈트 달성 시 무기에 부여되는 강력한 대미지 증가 배율입니다.</p>
             <table>
@@ -616,231 +632,239 @@
                 </tbody>
             </table>
 
-            <h3>③ 룸티스 귀걸이 강화 효과 (forthe.conf 기준)</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>인챈트</th>
-                        <th>🖤 검은빛 (축복)</th>
-                        <th>🖤 검은빛 (일반)</th>
-                        <th>❤️ 붉은빛 (축복)</th>
-                        <th>❤️ 붉은빛 (일반)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>+0강</td>
-                        <td>AC -1</td>
-                        <td>AC 0</td>
-                        <td>HP +20</td>
-                        <td>HP +10</td>
-                    </tr>
-                    <tr>
-                        <td>+1강</td>
-                        <td>AC -2, 댐감+1, 스턴내성+1%</td>
-                        <td>AC -1</td>
-                        <td>HP +30, 대미지+1, 명중+1, PVP댐+1</td>
-                        <td>HP +20</td>
-                    </tr>
-                    <tr>
-                        <td>+2강</td>
-                        <td>AC -3, 댐감+2, 스턴내성+2%</td>
-                        <td>AC -2</td>
-                        <td>HP +40, 대미지+2, 명중+2, PVP댐+2</td>
-                        <td>HP +30</td>
-                    </tr>
-                    <tr>
-                        <td>+3강</td>
-                        <td>AC -4, 댐감+3, 스턴내성+3%</td>
-                        <td>AC -3</td>
-                        <td>HP +50, 대미지+3, 명중+3, PVP댐+3</td>
-                        <td>HP +40</td>
-                    </tr>
-                    <tr>
-                        <td>+4강</td>
-                        <td>AC -5, 댐감+4, 스턴내성+4%</td>
-                        <td>AC -4</td>
-                        <td>HP +60, 대미지+4, 명중+3, PVP댐+4</td>
-                        <td>HP +50</td>
-                    </tr>
-                    <tr>
-                        <td>+5강</td>
-                        <td>AC -6, 댐감+1</td>
-                        <td>AC -5</td>
-                        <td>HP +70, 대미지+2, 명중+1</td>
-                        <td>HP +60, 대미지+1</td>
-                    </tr>
-                    <tr>
-                        <td>+6강</td>
-                        <td>AC -7, 댐감+2</td>
-                        <td>AC -6, 댐감+1</td>
-                        <td>HP +80, 대미지+3, 명중+2</td>
-                        <td>HP +70, 대미지+2</td>
-                    </tr>
-                    <tr>
-                        <td>+7강</td>
-                        <td>AC -8, 댐감+3, 스턴내성+1%</td>
-                        <td>AC -7, 댐감+2</td>
-                        <td>HP +90, 대미지+4, 명중+3, PVP댐+1</td>
-                        <td>HP +80, 대미지+3, 명중+1</td>
-                    </tr>
-                    <tr>
-                        <td>+8강</td>
-                        <td>AC -9, 댐감+4, 스턴내성+2%</td>
-                        <td>AC -8, 댐감+3</td>
-                        <td>HP +100, 대미지+5, 명중+4, PVP댐+2</td>
-                        <td>HP +90, 대미지+4, 명중+2</td>
-                    </tr>
-                    <tr>
-                        <td class="highlight">+9강</td>
-                        <td class="mint">AC -10, 댐감+5, 스턴내성+3%</td>
-                        <td>AC -9, 댐감+4</td>
-                        <td class="mint">HP +110, 대미지+6, 명중+5, PVP댐+3</td>
-                        <td>HP +100, 대미지+5, 명중+3</td>
-                    </tr>
-                </tbody>
-            </table>
+            <!-- [크라운 전용 미출시 음영] 룸티스 귀걸이 (최신 스탯 반영) -->
+            <div class="unreleased-section">
+                <h3 style="margin-top: 0;">③ 룸티스 귀걸이 강화 효과 <span class="badge-unreleased">미출시</span></h3>
+                <p>룸티스 귀걸이 4종(검은빛, 붉은빛, 보랏빛, 푸른빛) 인챈트별 상세 스탯 비교표입니다. (추후 업데이트 예정)</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>인챈트</th>
+                            <th>🖤 검은빛 (축복)</th>
+                            <th>🖤 검은빛 (일반)</th>
+                            <th>❤️ 붉은빛 (축복)</th>
+                            <th>❤️ 붉은빛 (일반)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>+0강</td>
+                            <td>AC -1</td>
+                            <td>AC 0</td>
+                            <td>HP +20</td>
+                            <td>HP +10</td>
+                        </tr>
+                        <tr>
+                            <td>+1강</td>
+                            <td>AC -2, 리덕션+1, 스턴내성+1%</td>
+                            <td>AC -1</td>
+                            <td>HP +30, 근댐+1, 명중+1, PVP+1</td>
+                            <td>HP +20</td>
+                        </tr>
+                        <tr>
+                            <td>+2강</td>
+                            <td>AC -3, 리덕션+2, 스턴내성+2%</td>
+                            <td>AC -2</td>
+                            <td>HP +40, 근댐+2, 명중+2, PVP+2</td>
+                            <td>HP +30</td>
+                        </tr>
+                        <tr>
+                            <td>+3강</td>
+                            <td>AC -4, 리덕션+3, 스턴내성+3%</td>
+                            <td>AC -3</td>
+                            <td>HP +50, 근댐+3, 명중+3, PVP+3</td>
+                            <td>HP +40</td>
+                        </tr>
+                        <tr>
+                            <td>+4강</td>
+                            <td>AC -5, 리덕션+4, 스턴내성+4%</td>
+                            <td>AC -4</td>
+                            <td>HP +60, 근댐+4, 명중+3, PVP+4</td>
+                            <td>HP +50</td>
+                        </tr>
+                        <tr>
+                            <td>+5강</td>
+                            <td>AC -6, 리덕션+5, 스턴내성+5%</td>
+                            <td>AC -5, 리덕션+1, 스턴내성+1%</td>
+                            <td>HP +70, 근댐+5, 명중+4, PVP+5</td>
+                            <td>HP +60, 근댐+1, 명중+1</td>
+                        </tr>
+                        <tr>
+                            <td>+6강</td>
+                            <td>AC -7, 리덕션+6, 스턴내성+6%</td>
+                            <td>AC -6, 리덕션+2, 스턴내성+2%</td>
+                            <td>HP +80, 근댐+6, 명중+5, PVP+6</td>
+                            <td>HP +70, 근댐+2, 명중+2</td>
+                        </tr>
+                        <tr>
+                            <td>+7강</td>
+                            <td>AC -8, 리덕션+7, 스턴내성+7%</td>
+                            <td>AC -7, 리덕션+3, 스턴내성+3%</td>
+                            <td>HP +90, 근댐+7, 명중+6, PVP+7</td>
+                            <td>HP +80, 근댐+3, 명중+3, PVP+1</td>
+                        </tr>
+                        <tr>
+                            <td>+8강</td>
+                            <td>AC -9, 리덕션+8, 스턴내성+8%</td>
+                            <td>AC -8, 리덕션+4, 스턴내성+4%</td>
+                            <td>HP +100, 근댐+8, 명중+7, PVP+8</td>
+                            <td>HP +90, 근댐+4, 명중+4, PVP+2</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">+9강</td>
+                            <td class="mint">AC -10, 리덕션+9, 스턴내성+10%</td>
+                            <td>AC -9, 리덕션+5, 스턴내성+5%</td>
+                            <td class="mint">HP +110, 근댐+9, 명중+8, PVP+10</td>
+                            <td>HP +100, 근댐+5, 명중+5, PVP+3</td>
+                        </tr>
+                    </tbody>
+                </table>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>인챈트</th>
-                        <th>💜 보랏빛 (축복)</th>
-                        <th>💜 보랏빛 (일반)</th>
-                        <th>💙 푸른빛 (축복)</th>
-                        <th>💙 푸른빛 (일반)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>+0강</td>
-                        <td>MP +20</td>
-                        <td>MP +10</td>
-                        <td>물약회복 +4%</td>
-                        <td>물약회복 +2%</td>
-                    </tr>
-                    <tr>
-                        <td>+1강</td>
-                        <td>MP +30, SP+1, 마법적중+1</td>
-                        <td>MP +20</td>
-                        <td>물약회복 +8%, 댐감+1</td>
-                        <td>물약회복 +4%</td>
-                    </tr>
-                    <tr>
-                        <td>+2강</td>
-                        <td>MP +40, SP+2, 마법적중+2</td>
-                        <td>MP +30</td>
-                        <td>물약회복 +16%, 댐감+2</td>
-                        <td>물약회복 +8%</td>
-                    </tr>
-                    <tr>
-                        <td>+3강</td>
-                        <td>MP +50, SP+3, 마법적중+3</td>
-                        <td>MP +40</td>
-                        <td>물약회복 +20%, 댐감+3, AC-1</td>
-                        <td>물약회복 +10%, 댐감+1</td>
-                    </tr>
-                    <tr>
-                        <td>+4강</td>
-                        <td>MP +60, SP+4, 마법적중+4</td>
-                        <td>MP +50</td>
-                        <td>물약회복 +30%, 댐감+4, AC-2</td>
-                        <td>물약회복 +15%, 댐감+2</td>
-                    </tr>
-                    <tr>
-                        <td>+5강</td>
-                        <td>MP +70, SP+2</td>
-                        <td>MP +60, SP+1</td>
-                        <td>물약회복 +16%, 댐감+2, AC-3</td>
-                        <td>물약회복 +14%, 댐감+2, AC-1</td>
-                    </tr>
-                    <tr>
-                        <td>+6강</td>
-                        <td>MP +80, SP+3</td>
-                        <td>MP +70, SP+2</td>
-                        <td>물약회복 +18%, 댐감+2, AC-4</td>
-                        <td>물약회복 +16%, 댐감+2, AC-1</td>
-                    </tr>
-                    <tr>
-                        <td>+7강</td>
-                        <td>MP +90, SP+4, 마법적중+1</td>
-                        <td>MP +80, SP+3</td>
-                        <td>물약회복 +23%, 댐감+2, AC-5</td>
-                        <td>물약회복 +18%, 댐감+2, AC-2</td>
-                    </tr>
-                    <tr>
-                        <td>+8강</td>
-                        <td>MP +100, SP+5, 마법적중+2</td>
-                        <td>MP +90, SP+4</td>
-                        <td>물약회복 +28%, 댐감+2, AC-6</td>
-                        <td>물약회복 +22%, 댐감+2, AC-3</td>
-                    </tr>
-                    <tr>
-                        <td class="highlight">+9강</td>
-                        <td class="mint">MP +110, SP+6, 마법적중+3</td>
-                        <td>MP +100, SP+5</td>
-                        <td class="mint">물약회복 +33%, 댐감+2, AC-8</td>
-                        <td>물약회복 +25%, 댐감+2, AC-5</td>
-                    </tr>
-                </tbody>
-            </table>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>인챈트</th>
+                            <th>💜 보랏빛 (축복)</th>
+                            <th>💜 보랏빛 (일반)</th>
+                            <th>💙 푸른빛 (축복)</th>
+                            <th>💙 푸른빛 (일반)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>+0강</td>
+                            <td>MP +20</td>
+                            <td>MP +10</td>
+                            <td>물약회복 +4%</td>
+                            <td>물약회복 +2%</td>
+                        </tr>
+                        <tr>
+                            <td>+1강</td>
+                            <td>MP +30, SP+1, 마법적중+1</td>
+                            <td>MP +20</td>
+                            <td>물약회복 +8%, 리덕션+1</td>
+                            <td>물약회복 +4%</td>
+                        </tr>
+                        <tr>
+                            <td>+2강</td>
+                            <td>MP +40, SP+2, 마법적중+2</td>
+                            <td>MP +30</td>
+                            <td>물약회복 +16%, 리덕션+2</td>
+                            <td>물약회복 +8%</td>
+                        </tr>
+                        <tr>
+                            <td>+3강</td>
+                            <td>MP +50, SP+3, 마법적중+3</td>
+                            <td>MP +40</td>
+                            <td>물약회복 +20%, 리덕션+3, AC-1</td>
+                            <td>물약회복 +10%, 리덕션+1</td>
+                        </tr>
+                        <tr>
+                            <td>+4강</td>
+                            <td>MP +60, SP+4, 마법적중+4</td>
+                            <td>MP +50</td>
+                            <td>물약회복 +30%, 리덕션+4, AC-2</td>
+                            <td>물약회복 +15%, 리덕션+2</td>
+                        </tr>
+                        <tr>
+                            <td>+5강</td>
+                            <td>MP +70, SP+5, 마법적중+5</td>
+                            <td>MP +60, SP+1, 마법적중+1</td>
+                            <td>물약회복 +32%, 리덕션+5, AC-3</td>
+                            <td>물약회복 +17%, 리덕션+2, AC-3</td>
+                        </tr>
+                        <tr>
+                            <td>+6강</td>
+                            <td>MP +80, SP+6, 마법적중+6</td>
+                            <td>MP +70, SP+2, 마법적중+2</td>
+                            <td>물약회복 +34%, 리덕션+6, AC-4</td>
+                            <td>물약회복 +19%, 리덕션+3, AC-3</td>
+                        </tr>
+                        <tr>
+                            <td>+7강</td>
+                            <td>MP +90, SP+7, 마법적중+7</td>
+                            <td>MP +80, SP+3, 마법적중+3</td>
+                            <td>물약회복 +36%, 리덕션+7, AC-5</td>
+                            <td>물약회복 +21%, 리덕션+3, AC-4</td>
+                        </tr>
+                        <tr>
+                            <td>+8강</td>
+                            <td>MP +100, SP+8, 마법적중+8</td>
+                            <td>MP +90, SP+4, 마법적중+4</td>
+                            <td>물약회복 +38%, 리덕션+8, AC-6</td>
+                            <td>물약회복 +23%, 리덕션+4, AC-4</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">+9강</td>
+                            <td class="mint">MP +110, SP+9, 마법적중+10</td>
+                            <td>MP +100, SP+5, 마법적중+5</td>
+                            <td class="mint">물약회복 +42%, 리덕션+10, AC-8</td>
+                            <td>물약회복 +26%, 리덕션+5, AC-5</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-            <h3>④ 스냅퍼 반지 강화 효과 (대표 수치 요약)</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>반지 종류</th>
-                        <th>+3강 효과</th>
-                        <th>+5강 효과</th>
-                        <th>+7강 효과</th>
-                        <th>+9강 효과 (MAX)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="highlight">지혜 반지 (축)</td>
-                        <td>HP+20, AC-4</td>
-                        <td>HP+30, SP+2, AC-5</td>
-                        <td>HP+40, SP+4, MP+15, AC-7</td>
-                        <td class="mint">HP+60, SP+9, MP+65, AC-12</td>
-                    </tr>
-                    <tr>
-                        <td>지혜 반지 (일반)</td>
-                        <td>HP+15, AC-3</td>
-                        <td>HP+25, SP+1, AC-4</td>
-                        <td>HP+35, SP+3, AC-5</td>
-                        <td>HP+50, SP+7, MP+55, AC-9</td>
-                    </tr>
-                    <tr>
-                        <td class="highlight">용사 반지 (축)</td>
-                        <td>HP+10, AC-5</td>
-                        <td>HP+20, 댐+2, 명중+2, AC-6</td>
-                        <td>HP+30, 댐+4, 명중+4, AC-7, 댐감+2</td>
-                        <td class="mint">HP+50, 댐+8, 명중+8, AC-12, 댐감+5</td>
-                    </tr>
-                    <tr>
-                        <td>용사 반지 (일반)</td>
-                        <td>HP+5, AC-4</td>
-                        <td>HP+15, 댐+1, 명중+1, AC-5</td>
-                        <td>HP+25, 댐+3, 명중+3, AC-5</td>
-                        <td>HP+40, 댐+7, 명중+7, AC-9</td>
-                    </tr>
-                    <tr>
-                        <td class="highlight">체력 반지 (축)</td>
-                        <td>HP+30, AC-4</td>
-                        <td>HP+40, 댐+2, AC-6</td>
-                        <td>HP+55, 댐+4, AC-7, 댐감+2</td>
-                        <td class="mint">HP+75, 댐+9, AC-12, 댐감+7</td>
-                    </tr>
-                    <tr>
-                        <td>체력 반지 (일반)</td>
-                        <td>HP+25, AC-3</td>
-                        <td>HP+35, 댐+1, AC-4</td>
-                        <td>HP+45, 댐+3, AC-5, 댐감+1</td>
-                        <td>HP+55, 댐+7, AC-9, 댐감+5</td>
-                    </tr>
-                </tbody>
-            </table>
+            <!-- [크라운 전용 미출시 음영] 스냅퍼 반지 -->
+            <div class="unreleased-section">
+                <h3 style="margin-top: 0;">④ 스냅퍼 반지 강화 효과 (대표 수치 요약) <span class="badge-unreleased">미출시</span></h3>
+                <p>스냅퍼 반지 3종(지혜, 용사, 체력) 인챈트별 대표 수치입니다. (추후 업데이트 예정)</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>반지 종류</th>
+                            <th>+3강 효과</th>
+                            <th>+5강 효과</th>
+                            <th>+7강 효과</th>
+                            <th>+9강 효과 (MAX)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="highlight">지혜 반지 (축)</td>
+                            <td>HP+20, AC-4</td>
+                            <td>HP+30, SP+2, AC-5</td>
+                            <td>HP+40, SP+4, MP+15, AC-7</td>
+                            <td class="mint">HP+60, SP+9, MP+65, AC-12</td>
+                        </tr>
+                        <tr>
+                            <td>지혜 반지 (일반)</td>
+                            <td>HP+15, AC-3</td>
+                            <td>HP+25, SP+1, AC-4</td>
+                            <td>HP+35, SP+3, AC-5</td>
+                            <td>HP+50, SP+7, MP+55, AC-9</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">용사 반지 (축)</td>
+                            <td>HP+10, AC-5</td>
+                            <td>HP+20, 댐+2, 명중+2, AC-6</td>
+                            <td>HP+30, 댐+4, 명중+4, AC-7, 댐감+2</td>
+                            <td class="mint">HP+50, 댐+8, 명중+8, AC-12, 댐감+5</td>
+                        </tr>
+                        <tr>
+                            <td>용사 반지 (일반)</td>
+                            <td>HP+5, AC-4</td>
+                            <td>HP+15, 댐+1, 명중+1, AC-5</td>
+                            <td>HP+25, 댐+3, 명중+3, AC-5</td>
+                            <td>HP+40, 댐+7, 명중+7, AC-9</td>
+                        </tr>
+                        <tr>
+                            <td class="highlight">체력 반지 (축)</td>
+                            <td>HP+30, AC-4</td>
+                            <td>HP+40, 댐+2, AC-6</td>
+                            <td>HP+55, 댐+4, AC-7, 댐감+2</td>
+                            <td class="mint">HP+75, 댐+9, AC-12, 댐감+7</td>
+                        </tr>
+                        <tr>
+                            <td>체력 반지 (일반)</td>
+                            <td>HP+25, AC-3</td>
+                            <td>HP+35, 댐+1, AC-4</td>
+                            <td>HP+45, 댐+3, AC-5, 댐감+1</td>
+                            <td>HP+55, 댐+7, AC-9, 댐감+5</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <h3>⑤ 가더류 강화 효과</h3>
             <div class="card-grid">

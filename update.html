@@ -1,14 +1,25 @@
 ﻿<!DOCTYPE html>
 <html lang="ko">
 <head>
+<script>
+    if (window !== window.top) {
+        document.documentElement.classList.add('iframe-mode');
+        const style = document.createElement('style');
+        style.innerHTML = '.sidebar { display: none !important; } .main-content { margin-left: 0 !important; width: 100% !important; }';
+        document.head.appendChild(style);
+    }
+</script>
 <meta charset="UTF-8">
 <title>Crown Server - 업데이트</title>
 
 <style>
+html { overflow-y: scroll; }
 /* ------------------------------
    좌측 사이드바 메뉴 스타일
 ------------------------------ */
 .sidebar {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+    box-sizing: border-box;
     position: fixed;
     top: 0;
     left: 0;
@@ -22,11 +33,9 @@
     box-shadow: 5px 0 25px rgba(0,0,0,0.6);
     backdrop-filter: blur(10px);
 }
-.sidebar-logo {
-    padding: 35px 20px 25px 20px;
+.sidebar-logo { box-sizing: border-box; padding: 18px 20px 12px 20px;
     text-align: center;
-    border-bottom: 1px solid rgba(0,150,255,0.15);
-}
+    border-bottom: 1px solid rgba(0,150,255,0.15); }
 .sidebar-logo h2 {
     margin: 0;
     color: #fff;
@@ -35,16 +44,13 @@
     letter-spacing: 3px;
     text-shadow: 0 0 15px #0066ff, 0 0 25px #0033aa;
 }
-.sidebar-menu {
-    display: flex;
+.sidebar-menu { box-sizing: border-box; display: flex;
     flex-direction: column;
-    padding: 25px 0;
+    padding: 5px 0;
     flex: 1;
-    overflow-y: auto;
-}
-.sidebar-menu a {
-    color: #ccc;
-    padding: 16px 30px;
+    overflow-y: auto; }
+.sidebar-menu a { box-sizing: border-box; color: #ccc;
+    padding: 10px 30px;
     font-size: 18px;
     font-weight: bold;
     text-decoration: none;
@@ -52,9 +58,8 @@
     align-items: center;
     gap: 15px;
     border-left: 4px solid transparent;
-    transition: 0.25s;
-}
-.sidebar-menu a:hover {
+    transition: 0.25s; }
+.sidebar-menu a:hover, .sidebar-menu a.active {
     color: #33ccff;
     background: rgba(0, 150, 255, 0.08);
     border-left: 4px solid #33ccff;
@@ -294,6 +299,15 @@ table.board tr:hover td {
     cursor: pointer;
     color: #fff;
 }
+
+.sidebar-menu::-webkit-scrollbar { display: none !important; }
+.sidebar-menu { -ms-overflow-style: none !important; scrollbar-width: none !important; }
+
+
+@media screen and (min-width: 769px) {
+    html.iframe-mode .sidebar { display: none !important; }
+    html.iframe-mode .main-content { margin-left: 0 !important; width: 100% !important; }
+}
 </style>
 
 <script>
@@ -485,11 +499,13 @@ function closeModal() {
         <a href="update.html" class="active">⚡ 업&nbsp;&nbsp;데&nbsp;&nbsp;이&nbsp;&nbsp;트</a>
         <a href="boss.html">💀 보&nbsp;&nbsp;스&nbsp;&nbsp;정&nbsp;&nbsp;보</a>
         <a href="doll.html">🧸 마&nbsp;&nbsp;법&nbsp;&nbsp;인&nbsp;&nbsp;형</a>
+        <a href="maan.html">👁️ 마&nbsp;&nbsp;안&nbsp;&nbsp;정&nbsp;&nbsp;보</a>
         <a href="item.html">💎 아&nbsp;이&nbsp;템&nbsp;정&nbsp;보</a>
         <a href="feature.html">⚙️ 간&nbsp;&nbsp;편&nbsp;&nbsp;기&nbsp;&nbsp;능</a>
         <a href="hunting.html">🚩 레벨별 사냥터</a>
         <a href="promo.html">📣 홍&nbsp;&nbsp;보&nbsp;&nbsp;안&nbsp;&nbsp;내</a>
         <a href="service.html">💬 고&nbsp;&nbsp;객&nbsp;&nbsp;센&nbsp;&nbsp;터</a>
+        <a href="security.html">🛡️ 보안 설정(필수)</a>
         <a href="download.html">⬇ 다&nbsp;&nbsp;운&nbsp;&nbsp;로&nbsp;&nbsp;드</a>
     </div>
     <div class="sidebar-footer">
